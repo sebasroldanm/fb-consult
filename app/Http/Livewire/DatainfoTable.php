@@ -11,10 +11,12 @@ class DatainfoTable extends Component
     use WithPagination;
 
     protected $queryString = [
-        'searchName' => ['except' => ''],
-        'searchLast' => ['except' => ''],
-        'searchLocation' => ['except' => ''],
-        'searchCity' => ['except' => ''],
+        'searchName'        => ['except' => ''],
+        'searchLast'        => ['except' => ''],
+        'searchLocation'    => ['except' => ''],
+        'searchCity'        => ['except' => ''],
+        // 'searchGender'      => ['except' => ''],
+        // 'searchCivil'       => ['except' => ''],
         'perPage'
     ];
 
@@ -22,6 +24,8 @@ class DatainfoTable extends Component
     public $searchLast = '';
     public $searchLocation = '';
     public $searchCity = '';
+    // public $searchGender = '';
+    // public $searchCivil = '';
     public $perPage = 5;
 
     public function render()
@@ -31,6 +35,8 @@ class DatainfoTable extends Component
                 ->where('apellido', 'LIKE', "%{$this->searchLast}%")
                 ->where('ubicacion', 'LIKE', "%{$this->searchLocation}%")
                 ->where('ciudad', 'LIKE', "%{$this->searchCity}%")
+                // ->where('genero', $this->searchGender)
+                // ->where('civil', $this->searchCivil)
                 ->paginate($this->perPage)
         ])->layout('layouts.app');
     }
@@ -43,10 +49,5 @@ class DatainfoTable extends Component
         $this->searchCity = '';
         $this->page = 1;
         $this->perPage = 5;
-    }
-
-    public function directHome()
-    {
-        
     }
 }
