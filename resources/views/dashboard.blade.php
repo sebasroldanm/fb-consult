@@ -145,13 +145,13 @@
                                                         <option value="Single">Soltero(a)</option>
                                                         <option value="Married">Casado(a)</option>
                                                         <option value="Separated">Separado(a)</option>
+                                                        <option value="Divorced">Divorciado(a)</option>
                                                         <option value="Widowed">Viudo(a)</option>
                                                         <option value="In a relationship">En una relación</option>
+                                                        <option value="In an open relationship">En una relación abierta</option>
                                                         <option value="In a civil union">En una unión civil</option>
                                                         <option value="Engaged">Comprometido(a)</option>
                                                         <option value="In a domestic partnership">En pareja de hecho</option>
-                                                        <option value="Divorced">Divorciado(a)</option>
-                                                        <option value="In an open relationship">En una relación abierta</option>
                                                     </select>
                                             </div>
                                         </div>

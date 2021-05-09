@@ -52,6 +52,10 @@
                                                 </th>
                                                 <th scope="col"
                                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Genero y Estado Civil
+                                                </th>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     Celular
                                                 </th>
                                                 <th scope="col"
@@ -85,6 +89,62 @@
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <div class="text-sm text-gray-900">{{ $item->ubicacion }}</div>
                                                     <div class="text-sm text-gray-500">{{ $item->ciudad }}</div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="text-sm text-gray-900">
+                                                        @switch($item->genero)
+                                                            @case('female')
+                                                                Femenino
+                                                                @break
+                                                            @case('female (hidden)')
+                                                                Femenino (Oculto)
+                                                                @break
+                                                            @case('male')
+                                                                Masculino
+                                                                @break
+                                                            @case('male (hidden)')
+                                                                Masculino (Oculto)
+                                                                @break
+                                                            @default
+                                                                No Registra
+                                                        @endswitch
+                                                    </div>
+                                                    <div class="text-sm text-gray-500">
+                                                        @switch($item->civil)
+                                                            @case('Single')
+                                                                Soltero(a)
+                                                                @break
+                                                            @case('Married')
+                                                                Casado(a)
+                                                                @break
+                                                            @case('Separated')
+                                                                Separado(a)
+                                                                @break
+                                                            @case('Widowed')
+                                                                Viudo(a)
+                                                                @break
+                                                            @case('In a relationship')
+                                                                En una relación
+                                                                @break
+                                                            @case('In a civil union')
+                                                                En una unión civil
+                                                                @break
+                                                            @case('Engaged')
+                                                                Comprometido(a)
+                                                                @break
+                                                            @case('In a domestic partnership')
+                                                                En pareja de hecho
+                                                                @break
+                                                            @case('Divorced')
+                                                                Divorciado(a)
+                                                                @break
+                                                            @case('In an open relationship')
+                                                                En una relación abierta
+                                                                @break
+                                                            @default
+                                                                No registra
+                                                        @endswitch
+                                                    </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <span

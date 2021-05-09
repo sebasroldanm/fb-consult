@@ -48,5 +48,5 @@ Route::middleware(['auth:sanctum', 'verified'])
         $location = (strlen($request->ubicacion) > 0) ? $request->ubicacion : '';
         $civil = (is_null($request->civil)) ? '' : $request->civil;
 
-        return redirect('/colombia?perPage=5&searchName='.$name.'&searchLast='.$nameLast.'&searchLocation='.$location.'&searchCity='.$city.'');
+        return redirect('/colombia?perPage=5&searchName='.$name.'&searchLast='.$nameLast.'&searchLocation='.$location.'&searchCity='.$city.'&searchGender='.$gender.'&searchCivil='.$civil.' ');
     });
