@@ -78,21 +78,37 @@
                                                         </div>
                                                         <div class="ml-4">
                                                             <div class="text-sm font-medium text-gray-900">
-                                                                {{ $item->nombre }}
+                                                                @if ($isMongo)
+                                                                    {{ $item['nombre'] }}
+                                                                @else
+                                                                    {{ $item->nombre }}
+                                                                @endif
                                                             </div>
                                                             <div class="text-sm text-gray-500">
-                                                                {{ $item->apellido }}
+                                                                @if ($isMongo)
+                                                                    {{ $item['apellido'] }}
+                                                                @else    
+                                                                    {{ $item->apellido }}
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    <div class="text-sm text-gray-900">{{ $item->ubicacion }}</div>
-                                                    <div class="text-sm text-gray-500">{{ $item->ciudad }}</div>
+                                                    @if ($isMongo)
+                                                        <div class="text-sm text-gray-900">{{ $item['ubicacion'] }}</div>
+                                                        <div class="text-sm text-gray-500">{{ $item['ciudad'] }}</div>
+                                                    @else
+                                                        <div class="text-sm text-gray-900">{{ $item->ubicacion }}</div>
+                                                        <div class="text-sm text-gray-500">{{ $item->ciudad }}</div>
+                                                    @endif
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <div class="text-sm text-gray-900">
-                                                        @switch($item->genero)
+                                                        @php
+                                                            $gen = ($isMongo) ? $item['genero'] : $item->genero ;
+                                                        @endphp
+                                                        @switch($gen)
                                                             @case('female')
                                                                 Femenino
                                                                 @break
@@ -110,7 +126,10 @@
                                                         @endswitch
                                                     </div>
                                                     <div class="text-sm text-gray-500">
-                                                        @switch($item->civil)
+                                                        @php
+                                                            $civ = ($isMongo) ? $item['civil'] : $item->civil ;
+                                                        @endphp
+                                                        @switch($civ)
                                                             @case('Single')
                                                                 Soltero(a)
                                                                 @break
@@ -149,12 +168,19 @@
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <span
                                                         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                        +{{ $item->celular }}
+                                                        @if ($isMongo)
+                                                            +{{ $item['celular'] }}
+                                                        @else
+                                                            +{{ $item->celular }}
+                                                        @endif
                                                     </span>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-                                                        <a href="https://www.facebook.com/profile.php?id={{ $item->fbid }}" target="_blank"><span class="font-semibold mr-2 text-left flex-auto">Ir al Perfil</span></a>
+                                                        @php
+                                                            $fb = ($isMongo) ? $item['fbid'] : $item->fbid ;
+                                                        @endphp
+                                                        <a href="https://www.facebook.com/profile.php?id={{ $fb }}" target="_blank"><span class="font-semibold mr-2 text-left flex-auto">Ir al Perfil</span></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -163,7 +189,7 @@
                                         </tbody>
                                     </table>
                                     <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
-                                        {{ $data->links() }}
+                                        {{-- {{ $data->links() }} --}}
                                     </div>
                                 </div>                                  
                             @else

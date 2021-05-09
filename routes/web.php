@@ -2,7 +2,9 @@
 
 use App\Http\Livewire\DatainfoTable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,41 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+
+    $isColletion = DB::connection('mongodb')->collection('fb-data')->count();
+
+    
+    if ($isColletion < 0) {
+        Schema::connection('mongodb')->dropIfExists('fb-data');
+
+        Schema::connection('mongodb')->create('fb-data', function ($collection) {
+            $collection->index('celular');
+            $collection->index('fbid');
+            $collection->index('nombre');
+            $collection->index('apellido');
+            $collection->index('genero');
+            $collection->index('ciudad');
+            $collection->index('ubicacion');
+            $collection->index('civil');
+            $collection->index('trabajo');
+            $collection->index('fecha');
+        });
+        DB::connection('mongodb')
+            ->collection('fb-data')
+            ->insert([
+                'celular' => 'Test',
+                'fbid' => 'Test',
+                'nombre' => 'Test',
+                'apellido' => 'Test',
+                'genero' => 'Test',
+                'ciudad' => 'Test',
+                'ubicacion' => 'Test',
+                'civil' => 'Test',
+                'trabajo' => 'Test',
+                'fecha' => 'Test'
+            ]);
+    }
+
     return view('welcome');
 });
 
@@ -48,5 +85,5 @@ Route::middleware(['auth:sanctum', 'verified'])
         $location = (strlen($request->ubicacion) > 0) ? $request->ubicacion : '';
         $civil = (is_null($request->civil)) ? '' : $request->civil;
 
-        return redirect('/colombia?perPage=5&searchName='.$name.'&searchLast='.$nameLast.'&searchLocation='.$location.'&searchCity='.$city.'&searchGender='.$gender.'&searchCivil='.$civil.' ');
+        return redirect('/colombia?perPage=5&searchName=' . $name . '&searchLast=' . $nameLast . '&searchLocation=' . $location . '&searchCity=' . $city . '&searchGender=' . $gender . '&searchCivil=' . $civil . ' ');
     });
