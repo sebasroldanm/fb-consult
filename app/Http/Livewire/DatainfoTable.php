@@ -31,12 +31,12 @@ class DatainfoTable extends Component
     public function render()
     {
         return view('livewire.datainfo-table', [
-            'data' => Datainfo::where('nombre', 'LIKE', "%{$this->searchName}%")
-                ->where('apellido', 'LIKE', "%{$this->searchLast}%")
-                ->where('ubicacion', 'LIKE', "%{$this->searchLocation}%")
-                ->where('ciudad', 'LIKE', "%{$this->searchCity}%")
-                ->where('genero', $this->searchGender)
-                ->where('civil', $this->searchCivil)
+            'data' => Datainfo::orWhere('nombre', 'LIKE', "%{$this->searchName}%")
+                ->orWhere('apellido', 'LIKE', "%{$this->searchLast}%")
+                ->orWhere('ubicacion', 'LIKE', "%{$this->searchLocation}%")
+                ->orWhere('ciudad', 'LIKE', "%{$this->searchCity}%")
+                ->orWhere('genero', $this->searchGender)
+                ->orWhere('civil', $this->searchCivil)
                 ->paginate($this->perPage)
         ])->layout('layouts.app');
     }
