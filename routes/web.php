@@ -19,38 +19,41 @@ use Illuminate\Support\Facades\Schema;
 
 Route::get('/', function () {
 
-    $isColletion = DB::connection('mongodb')->collection('fb-data')->count();
+    if (env('MONGO_ENABLED', false)) {
 
-    
-    if ($isColletion < 0) {
-        Schema::connection('mongodb')->dropIfExists('fb-data');
+        $isColletion = DB::connection('mongodb')->collection('fb-data')->count();
 
-        Schema::connection('mongodb')->create('fb-data', function ($collection) {
-            $collection->index('celular');
-            $collection->index('fbid');
-            $collection->index('nombre');
-            $collection->index('apellido');
-            $collection->index('genero');
-            $collection->index('ciudad');
-            $collection->index('ubicacion');
-            $collection->index('civil');
-            $collection->index('trabajo');
-            $collection->index('fecha');
-        });
-        DB::connection('mongodb')
-            ->collection('fb-data')
-            ->insert([
-                'celular' => 'Test',
-                'fbid' => 'Test',
-                'nombre' => 'Test',
-                'apellido' => 'Test',
-                'genero' => 'Test',
-                'ciudad' => 'Test',
-                'ubicacion' => 'Test',
-                'civil' => 'Test',
-                'trabajo' => 'Test',
-                'fecha' => 'Test'
-            ]);
+        
+        if ($isColletion < 0) {
+            Schema::connection('mongodb')->dropIfExists('fb-data');
+
+            Schema::connection('mongodb')->create('fb-data', function ($collection) {
+                $collection->index('celular');
+                $collection->index('fbid');
+                $collection->index('nombre');
+                $collection->index('apellido');
+                $collection->index('genero');
+                $collection->index('ciudad');
+                $collection->index('ubicacion');
+                $collection->index('civil');
+                $collection->index('trabajo');
+                $collection->index('fecha');
+            });
+            DB::connection('mongodb')
+                ->collection('fb-data')
+                ->insert([
+                    'celular' => 'Test',
+                    'fbid' => 'Test',
+                    'nombre' => 'Test',
+                    'apellido' => 'Test',
+                    'genero' => 'Test',
+                    'ciudad' => 'Test',
+                    'ubicacion' => 'Test',
+                    'civil' => 'Test',
+                    'trabajo' => 'Test',
+                    'fecha' => 'Test'
+                ]);
+        }
     }
 
     return view('welcome');
