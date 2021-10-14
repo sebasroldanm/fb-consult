@@ -19,7 +19,8 @@ class DatainfoTable extends Component
         'searchCity'        => ['except' => ''],
         'searchGender'      => ['except' => ''],
         'searchCivil'       => ['except' => ''],
-        'perPage'
+        'perPage',
+        'skipPage',
     ];
 
     public $searchName = '';
@@ -29,6 +30,8 @@ class DatainfoTable extends Component
     public $searchGender = '';
     public $searchCivil = '';
     public $perPage = 5;
+    public $skipPage = 0;
+    public $nowPage = 1;
     public $total = 0;
     public $isMongo = false;
 
@@ -65,7 +68,7 @@ class DatainfoTable extends Component
                 ->when(strlen($this->searchCivil) > 0, function ($q) {
                     return $q->where('civil', $this->searchCivil);
                 })
-                ->limit($this->perPage)->get();
+                ->skip($this->skipPage)->take($this->perPage)->get();
         }
         $this->result = $data->count();
         // $total = Datainfo::count();
@@ -83,6 +86,23 @@ class DatainfoTable extends Component
         $this->searchGender = '';
         $this->searchCivil = '';
         $this->page = 1;
+        $this->skipPage = 0;
         $this->perPage = 5;
+    }
+
+    public function nexPage() {
+        $this->skipPage = $this->skipPage + $this->perPage;
+        $this->nowPage ++;
+    }
+
+    public function prevPage() {
+        if (($this->skipPage - $this->perPage) <= 0) {
+            $this->skipPage = 0;
+            $this->nowPage = 1;
+        } else {
+            $this->skipPage = ($this->skipPage - $this->perPage);
+            $this->nowPage --;
+        }
+
     }
 }

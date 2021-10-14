@@ -195,9 +195,15 @@
                                             <!-- More people... -->
                                         </tbody>
                                     </table>
-                                    <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
+                                    <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6 flex justify-between content-center">
                                         {{-- {{ $data->links() }} --}}
-                                        Mostrando {{ $perPage }} de 17.025.429 resultados
+                                        @if ($this->skipPage != 0)
+                                            <button wire:click="prevPage" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Página Anterior</button>
+                                        @else
+                                            <button wire:click="nexPage" class="disabled:opacity-50 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Siguiente Página</button>
+                                        @endif
+                                        <div class="text-sm text-gray-500 inline-block align-middle">Mostrando {{ $perPage }} resultados de la página {{$nowPage}} de 17.025.429 resultados</div>
+                                        <button wire:click="nexPage" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Siguiente Página</button>
                                     </div>
                                 </div>
                             @else
