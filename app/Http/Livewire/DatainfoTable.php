@@ -29,6 +29,7 @@ class DatainfoTable extends Component
     public $searchGender = '';
     public $searchCivil = '';
     public $perPage = 5;
+    public $total = 0;
     public $isMongo = false;
 
     public function render()
@@ -66,9 +67,10 @@ class DatainfoTable extends Component
                 })
                 ->limit($this->perPage)->get();
         }
-
+        $this->result = $data->count();
+        // $total = Datainfo::count();
         return view('livewire.datainfo-table', [
-            'data' => $data
+            'data' => $data,
         ])->layout('layouts.app');
     }
 

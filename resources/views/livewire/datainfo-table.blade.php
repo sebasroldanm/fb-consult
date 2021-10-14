@@ -87,7 +87,7 @@
                                                             <div class="text-sm text-gray-500">
                                                                 @if ($isMongo)
                                                                     {{ $item['apellido'] }}
-                                                                @else    
+                                                                @else
                                                                     {{ $item->apellido }}
                                                                 @endif
                                                             </div>
@@ -197,13 +197,14 @@
                                     </table>
                                     <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
                                         {{-- {{ $data->links() }} --}}
+                                        Mostrando {{ $perPage }} de 17.025.429 resultados
                                     </div>
-                                </div>                                  
+                                </div>
                             @else
                                 <div class="bg-white px-4 py-3 border-t border-gray-500 sm:px-6">
                                     No hay resultados para la búsqueda
-                                    @if($searchName) Nombre: {{$searchName}},@endif 
-                                    @if($searchLast) Apellido: {{$searchLast}},@endif 
+                                    @if($searchName) Nombre: {{$searchName}},@endif
+                                    @if($searchLast) Apellido: {{$searchLast}},@endif
                                     @if($searchLocation) Ubicación: {{$searchLocation}},@endif
                                     @if($searchCity) Ciudad: {{$searchCity}},@endif
                                      en la página {{ $page }} al mostrar {{ $perPage }} por página
